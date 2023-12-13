@@ -7,7 +7,7 @@ function Home() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/get')
+    axios.get('https://backend-self-xi.vercel.app/todo/get-todo')
       .then(result => setTodos(result.data))
       .catch(err => console.log(err));
   }, []);
