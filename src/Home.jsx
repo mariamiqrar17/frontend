@@ -6,11 +6,21 @@ import Create from './Create';
 function Home() {
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    axios.get('https://backend-self-xi.vercel.app/todo/get-todo')
-      .then(result => setTodos(result.data))
-      .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //  axios.get('https://backend-self-xi.vercel.app/todo/get-todo')
+  //     .then(result => setTodos(result.data))
+  //     console.log(result)
+  //     .catch(err => console.log(err));
+  // }, []);
+  useEffect(()=>{
+    getData()
+
+  },[])
+  let getData = async() =>{
+    let a = await axios.get('https://backend-self-xi.vercel.app/todo/get-todo')
+    setTodos(a.data.Todo)
+    console.log(a.data.Todo)
+  }
 
   const handleEdit = (id) => {
     axios.put(`http://localhost:3001/update/${id}`)
@@ -41,7 +51,7 @@ function Home() {
                 <BsFillCheckCircleFill className='icon' > </BsFillCheckCircleFill> :
                <BsCircleFill className='icon' />
               }
-              <p className= {todo.done ? "line_through": ""}>{todo.task}</p>
+              <p className= {todo.done ? "line_through": ""}>{todo.todo}</p>
             </div>
             <div>
               <span><BsFillTrashFill className='icon' 
